@@ -9,14 +9,16 @@ repositories {
 }
 
 dependencies {
-    compile "com.typesafe.akka:akka-persistence_2.11:2.4.6"
+    compile "com.typesafe.akka:akka-persistence_2.11:2+"
     compile "org.dmonix.akka:akka-persistence-mock_2.11:1.1.1"
-    compile "com.typesafe.akka:akka-slf4j_2.11:2.4.6"
+    compile "com.typesafe.akka:akka-slf4j_2.11:2+"
+    compile "com.typesafe.akka:akka-http-experimental_2.11:2+"
+    compile "com.typesafe.akka:akka-http-spray-json-experimental_2.11:+"
     compile "ch.qos.logback:logback-classic:+"
     compile "com.typesafe.slick:slick_2.11:+"
     compile "com.h2database:h2:+"
 
     testCompile "org.scalatest:scalatest_2.11:3.0.0-RC1"
-    testCompile "com.typesafe.akka:akka-testkit_2.11:2.4.6"
+    testCompile "com.typesafe.akka:akka-testkit_2.11:2+"
     testRuntime "org.pegdown:pegdown:1.1.0"
 }

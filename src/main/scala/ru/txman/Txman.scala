@@ -1,8 +1,10 @@
 package ru.txman
 
 import akka.actor._
-import ru.txman.actors.Accounts.CreateAccount
-import ru.txman.actors.{AccountDaoService, AccountManager, TransactionManager}
+import scala.io.StdIn
+import ru.txman.actors._
+import scala.concurrent.Future
+import ru.txman.web.WebEndpoint
 
 /**
   * Provides ability to configure application properly.
@@ -10,7 +12,8 @@ import ru.txman.actors.{AccountDaoService, AccountManager, TransactionManager}
   */
 object Txman extends App {
 
-  val actorSystem = ActorSystem("TxMan")
+  implicit val actorSystem = ActorSystem("TxMan")
+  implicit val ec = actorSystem.dispatcher
 
   val accountManager = actorSystem.actorOf(Props[AccountManager], "account-manager")
 
@@ -18,5 +21,11 @@ object Txman extends App {
 
   val transactionManager = actorSystem.actorOf(Props(classOf[TransactionManager], accountManager), "transaction-manager")
 
-  accountManager ! CreateAccount("newRequest", "Sauron", 1000000)
+  val endpoint = new WebEndpoint("localhost", 8080, accountManager, transactionManager)
+
+  Future {
+    println("\n\nPress enter to stop server...\n\n")
+    StdIn.readLine()
+    endpoint.stopEndpoint.foreach(_ => actorSystem.terminate().foreach(println))
+  }
 }
