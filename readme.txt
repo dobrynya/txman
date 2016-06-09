@@ -72,6 +72,8 @@ java -jar txman.jar
 
 To stop the app press Enter in the console
 
+The application binds "0.0.0.0" at 8080. So endpoint is available at http://localhost:8080
+
 txman-soapui-project.xml contains a SOAPUI project with appropriate requests.
 
 Thanks for your attention. In case of any question please do not hesitate to ask me for an answer.
