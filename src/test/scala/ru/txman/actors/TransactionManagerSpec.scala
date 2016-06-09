@@ -5,6 +5,7 @@ import akka.testkit._
 import org.scalatest._
 import ru.txman.model._
 import TransactionManager._
+import scala.language.postfixOps
 import ru.txman.actors.Accounts._
 import scala.concurrent.duration._
 
@@ -13,7 +14,7 @@ import scala.concurrent.duration._
   * Created by dmitry on 05.06.16.
   */
 class TransactionManagerSpec extends TestKit(ActorSystem("test-kit")) with ImplicitSender
-  with FlatSpecLike with Matchers with BeforeAndAfterAll {
+  with FlatSpecLike with Matchers {
 
   val accountManager = TestProbe()
   val transactionManager = system.actorOf(Props(classOf[TransactionManager], accountManager.ref), "transaction-manager")

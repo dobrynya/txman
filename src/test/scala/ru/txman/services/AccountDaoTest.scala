@@ -11,8 +11,11 @@ import scala.concurrent.duration.Duration
   * Specification on AccountDao.
   * Created by dmitry on 08.06.16.
   */
-class AccountDaoTest extends FlatSpec with Matchers with AccountDao with BeforeAndAfterAll {
+class AccountDaoTest extends FlatSpec with Matchers with AccountDao {
   behavior of "AccountDao"
+
+  val config = ConfigFactory.load()
+  val databaseName = "txman-h2-database"
 
   implicit def executionContext: ExecutionContext = new ExecutionContext {
     def reportFailure(cause: Throwable): Unit = throw cause
@@ -83,7 +86,4 @@ class AccountDaoTest extends FlatSpec with Matchers with AccountDao with BeforeA
       case Seq(`updated`) =>
     }
   }
-
-  val config = ConfigFactory.load()
-  val databaseName = "txman-h2-database"
 }

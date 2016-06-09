@@ -1,9 +1,8 @@
 package ru.txman.services
 
 import com.typesafe.config.Config
-import ru.txman.model.AccountDetails
 import slick.driver.H2Driver.api._
-
+import ru.txman.model.AccountDetails
 import scala.concurrent.{ExecutionContext, Future}
 
 /**
